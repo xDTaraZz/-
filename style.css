@@ -1,0 +1,373 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+body {
+    font-family: 'Kanit', sans-serif;
+    background-color: #1a1a1a;
+    color: #fff;
+    min-height: 100vh;
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    touch-action: none;
+}
+
+.title-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 100%;
+    text-align: center;
+    opacity: 0;
+    z-index: 10;
+    display: none;
+    padding: 0 20px;
+}
+
+.title-container.show {
+    display: block;
+    animation: titleAppear 2s ease-out forwards;
+}
+
+@keyframes titleAppear {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0);
+    }
+    70% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+.title {
+    font-size: 4rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.subtitle {
+    font-size: 2rem;
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 2rem;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+.countdown {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 300;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    transform: translateY(-30px);
+    animation: slideDown 1.5s ease-out forwards;
+    padding: 0 20px;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.messages {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.message {
+    position: absolute;
+    font-size: 2rem;
+    font-weight: 400;
+    text-align: center;
+    color: #fff;
+    /* text-shadow: 0 0 5px rgba(255, 255, 255, 0.5); */
+    opacity: 0;
+    transform: scale(0);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 300px;
+    word-wrap: break-word;
+    line-height: 1.3;
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-sizing: border-box;
+    white-space: normal;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes messageAppear {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes messageFade {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0);
+    }
+}
+
+.initial-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    font-weight: 400;
+    text-align: center;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    z-index: 10;
+    animation: initialMessageAppear 2s ease-out forwards;
+    padding: 0 20px;
+}
+
+@keyframes initialMessageAppear {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    50% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.1);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes initialMessageFade {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+}
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+    .title {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .subtitle {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        line-height: 1.4;
+    }
+    
+    .countdown {
+        font-size: 1.2rem;
+        top: 30px;
+    }
+    
+    .message {
+        font-size: 1.2rem;
+        padding: 15px;
+        max-width: 250px;
+    }
+    
+    .initial-message {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 2rem;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+    }
+    
+    .countdown {
+        font-size: 1rem;
+        top: 20px;
+    }
+    
+    .message {
+        font-size: 1rem;
+        padding: 12px;
+        max-width: 200px;
+    }
+    
+    .initial-message {
+        font-size: 1.5rem;
+    }
+    
+    .title-container {
+        padding: 0 15px;
+    }
+    
+    .countdown {
+        padding: 0 15px;
+    }
+    
+    .initial-message {
+        padding: 0 15px;
+    }
+}
+
+@media (max-width: 360px) {
+    .title {
+        font-size: 1.8rem;
+    }
+    
+    .subtitle {
+        font-size: 0.9rem;
+    }
+    
+    .countdown {
+        font-size: 0.9rem;
+        top: 15px;
+    }
+    
+    .message {
+        font-size: 0.9rem;
+        padding: 10px;
+        max-width: 180px;
+    }
+    
+    .initial-message {
+        font-size: 1.3rem;
+    }
+}
+
+/* Landscape orientation adjustments */
+@media (max-height: 500px) and (orientation: landscape) {
+    .title {
+        font-size: 1.8rem;
+        margin-bottom: 0.3rem;
+    }
+    
+    .subtitle {
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .countdown {
+        font-size: 0.9rem;
+        top: 10px;
+    }
+    
+    .message {
+        font-size: 0.9rem;
+        padding: 10px;
+        max-width: 180px;
+    }
+    
+    .initial-message {
+        font-size: 1.3rem;
+    }
+}
+
+/* Prevent zoom on double tap */
+@media (max-width: 768px) {
+    body {
+        touch-action: manipulation;
+    }
+    
+    canvas {
+        touch-action: none;
+    }
+} 
